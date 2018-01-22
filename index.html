@@ -19,12 +19,13 @@
 
 <div id="canvas-frame"></div>
 <div>
-  Fov:<input type="number" value="75" id="txtFov"/>(0到180的值)
+  Fov:<input type="number" value="1" id="txtFov"/>(0到180的值)
 </div>
 <script src="lib/three.min.js"></script>
+<script src="lib/OrbitControls.js"></script>
 <script src="lib/stats.js"></script>
 <script>
-  var stats;
+  var stats, mControls;
 
   var STAGE = document.getElementById('canvas-frame')
   var renderer;
@@ -74,34 +75,24 @@
   var light;
 
   function initLight() {
-    // light = new THREE.AmbientLight('orange');
-    // light.position.set(100, 100, 200);
-    // scene.add(light);
-    // light = new THREE.PointLight('red', 0.8, 0);
-
-    // var light = new THREE.AmbientLight( 'black' );
-
-    // THREE.SpotLight( 'green', 1, 10, )
-
-    // light.position.set(1000, 300, 0);
-
     light = new THREE.PointLight('red');
-
     light.position.set(0, 0,250);
-
-
     scene.add(light);
   }
 
-  var cube;
-  var mesh;
-
   function initObject() {
-    var geometry = new THREE.CylinderGeometry(100, 150, 400);
-    var material = new THREE.MeshLambertMaterial({color: 'red'});
-    mesh = new THREE.Mesh(geometry, material);
-    mesh.position = new THREE.Vector3(0, 0, 0);
-    scene.add(mesh);
+    var cubeGeometry = new THREE.SphereGeometry(7, 6, 6, 2, 3, 1);
+    var cubeMaterial = new THREE.MeshBasicMaterial({
+      wireframe : true
+    });
+    cubeMaterial.color = new THREE.Color('red');
+    var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    cube.position = new THREE.Vector3(0, 0, 0);
+    cube.rotation.x = 30
+    cube.rotation.y = 3
+    cube.rotation.z = 3
+
+    scene.add(cube);
   }
 
   function initGrid(){
@@ -118,28 +109,22 @@
     initLight();
     initObject();
     initGrid()
+    initControls()
     renderer.clear();
     // renderer.render(scene, camera);
     animation()
   }
 
-  // function animation() {
-  //
-  //   //renderer.clear();
-  //   mesh.position.x += 1
-  //   // camera.position.x =camera.position.x +1;
-  //   // camera.position.y =camera.position.y +1;
-  //   renderer.render(scene, camera);
-  //
-  //   requestAnimationFrame(animation);
-  //
-  //   stats.update();
-  // }
+  // window.addEventListener('load', initGame, false);
+  function initControls() {
+    mControls = new THREE.OrbitControls(camera, renderer.domElement);
+  }
 
   function animation() {
     changeFov();
     renderer.render(scene, camera);
     requestAnimationFrame(animation);
+    mControls.update();
     stats.update();
 
   }
