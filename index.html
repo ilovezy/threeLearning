@@ -17,17 +17,40 @@
 </head>
 <body onload="threeStart();">
 
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, cum dolore eius laudantium magni repellendus voluptatibus! Asperiores delectus, facilis iusto labore libero nam pariatur perspiciatis, quis reprehenderit, repudiandae tenetur?
+
 <div id="canvas-frame"></div>
 
 <script src="lib/three.min.js"></script>
+<script src="lib/stats.js"></script>
 <script>
+
+//  function animate() {
+//
+//    stats.begin();
+//
+//    // monitored code goes here
+//
+//    stats.end();
+//
+//    requestAnimationFrame( animate );
+//
+//  }
+
+</script>
+<script>
+  var stats = new Stats();
+  stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+  document.body.appendChild( stats.dom );
+
   var STAGE = document.getElementById('canvas-frame')
   var renderer;
+
   function initThree() {
     width = STAGE.clientWidth;
     height = STAGE.clientHeight;
     renderer = new THREE.WebGLRenderer({
-      antialias : true
+      antialias: true
     });
     renderer.setSize(width, height);
     STAGE.appendChild(renderer.domElement);
@@ -35,49 +58,47 @@
   }
 
   var camera;
+
   function initCamera() {
     camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
     camera.position.x = 0;
-    camera.position.y = 1000;
-    camera.position.z = 0;
+    camera.position.y = 0;
+    camera.position.z = 6000;
     camera.up.x = 0;
-    camera.up.y = 0;
-    camera.up.z = 1;
+    camera.up.y = 1;
+    camera.up.z = 0;
     camera.lookAt({
-      x : 0,
-      y : 0,
-      z : 0
+      x: 0,
+      y: 0,
+      z: 0
     });
   }
 
   var scene;
+
   function initScene() {
     scene = new THREE.Scene();
   }
 
   var light;
+
   function initLight() {
-    light = new THREE.DirectionalLight('orange', 1.0, 0);
+    light = new THREE.AmbientLight('orange');
     light.position.set(100, 100, 200);
+    scene.add(light);
+    light = new THREE.PointLight('red');
+    light.position.set(0, 0,300);
     scene.add(light);
   }
 
   var cube;
+  var mesh;
   function initObject() {
-
-    var geometry = new THREE.Geometry();
-    var material = new THREE.LineBasicMaterial( { vertexColors: true } );
-    var color1 = new THREE.Color( 0x444444 ), color2 = new THREE.Color( 0xFF0000 );
-
-    // 线的材质可以由2点的颜色决定
-    var p1 = new THREE.Vector3( -100, 0, 100 );
-    var p2 = new THREE.Vector3(  100, 0, -100 );
-    geometry.vertices.push(p1);
-    geometry.vertices.push(p2);
-    geometry.colors.push( color1, color2 );
-
-    var line = new THREE.Line( geometry, material, THREE.LinePieces );
-    scene.add(line);
+    var geometry = new THREE.CylinderGeometry( 100,150,400);
+    var material = new THREE.MeshLambertMaterial( { color:0xFFFF00} );
+    mesh = new THREE.Mesh( geometry,material);
+    mesh.position = new THREE.Vector3(0,0,0);
+    scene.add(mesh);
   }
 
   function threeStart() {
@@ -87,8 +108,25 @@
     initLight();
     initObject();
     renderer.clear();
-    renderer.render(scene, camera);
+    // renderer.render(scene, camera);
+    animation()
   }
+
+  function animation() {
+    stats.begin();
+
+    //renderer.clear();
+    mesh.position.x += 1
+    // camera.position.x =camera.position.x +1;
+    // camera.position.y =camera.position.y +1;
+    renderer.render(scene, camera);
+    stats.end();
+
+    requestAnimationFrame(animation);
+
+  }
+
+
 </script>
 </body>
 </html>
