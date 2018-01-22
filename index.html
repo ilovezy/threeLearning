@@ -17,31 +17,14 @@
 </head>
 <body onload="threeStart();">
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, cum dolore eius laudantium magni repellendus voluptatibus! Asperiores delectus, facilis iusto labore libero nam pariatur perspiciatis, quis reprehenderit, repudiandae tenetur?
-
 <div id="canvas-frame"></div>
-
+<div>
+  Fov:<input type="number" value="45" id="txtFov"/>(0到180的值)
+</div>
 <script src="lib/three.min.js"></script>
 <script src="lib/stats.js"></script>
 <script>
-
-//  function animate() {
-//
-//    stats.begin();
-//
-//    // monitored code goes here
-//
-//    stats.end();
-//
-//    requestAnimationFrame( animate );
-//
-//  }
-
-</script>
-<script>
-  var stats = new Stats();
-  stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
-  document.body.appendChild( stats.dom );
+  var stats;
 
   var STAGE = document.getElementById('canvas-frame')
   var renderer;
@@ -53,17 +36,25 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, cum dolore eius
       antialias: true
     });
     renderer.setSize(width, height);
+
     STAGE.appendChild(renderer.domElement);
     renderer.setClearColor(0xFFFFFF, 1.0);
+
+    stats = new Stats();
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+    STAGE.appendChild(stats.domElement);
   }
 
   var camera;
 
   function initCamera() {
+    // camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
     camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
     camera.position.x = 0;
     camera.position.y = 0;
-    camera.position.z = 6000;
+    camera.position.z = 600;
     camera.up.x = 0;
     camera.up.y = 1;
     camera.up.z = 0;
@@ -87,17 +78,18 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, cum dolore eius
     light.position.set(100, 100, 200);
     scene.add(light);
     light = new THREE.PointLight('red');
-    light.position.set(0, 0,300);
+    light.position.set(0, 0, 300);
     scene.add(light);
   }
 
   var cube;
   var mesh;
+
   function initObject() {
-    var geometry = new THREE.CylinderGeometry( 100,150,400);
-    var material = new THREE.MeshLambertMaterial( { color:0xFFFF00} );
-    mesh = new THREE.Mesh( geometry,material);
-    mesh.position = new THREE.Vector3(0,0,0);
+    var geometry = new THREE.CylinderGeometry(100, 150, 400);
+    var material = new THREE.MeshLambertMaterial({color: 0xFFFF00});
+    mesh = new THREE.Mesh(geometry, material);
+    mesh.position = new THREE.Vector3(0, 0, 0);
     scene.add(mesh);
   }
 
@@ -112,20 +104,37 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, cum dolore eius
     animation()
   }
 
+  // function animation() {
+  //
+  //   //renderer.clear();
+  //   mesh.position.x += 1
+  //   // camera.position.x =camera.position.x +1;
+  //   // camera.position.y =camera.position.y +1;
+  //   renderer.render(scene, camera);
+  //
+  //   requestAnimationFrame(animation);
+  //
+  //   stats.update();
+  // }
+
   function animation() {
-    stats.begin();
-
-    //renderer.clear();
-    mesh.position.x += 1
-    // camera.position.x =camera.position.x +1;
-    // camera.position.y =camera.position.y +1;
+    changeFov();
     renderer.render(scene, camera);
-    stats.end();
-
     requestAnimationFrame(animation);
+    stats.update();
 
   }
 
+  function setCameraFov(fov) {
+    camera.fov = fov;
+    camera.updateProjectionMatrix();
+  }
+
+  function changeFov() {
+    var txtFov = document.getElementById("txtFov").value;
+    var val = parseFloat(txtFov);
+    setCameraFov(val);
+  }
 
 </script>
 </body>
