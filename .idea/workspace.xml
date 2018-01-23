@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9ef31ca-1f43-454a-a9b8-7ee1fcb11339" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/lib/TweenMax.min.js" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/material.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/rabbit.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
@@ -39,13 +39,33 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="367">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="material.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/material.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="3" lean-forward="false" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rabbit.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rabbit.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="327" column="0" lean-forward="false" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
               <folding>
-                <element signature="e#3739#8698#0" expanded="false" />
-                <element signature="e#8744#10622#0" expanded="false" />
-                <element signature="e#10668#11815#0" expanded="false" />
-                <element signature="e#11864#14322#0" expanded="false" />
+                <element signature="e#29#4720#0" expanded="false" />
+                <element signature="e#4762#6556#0" expanded="false" />
+                <element signature="e#6598#7705#0" expanded="false" />
+                <element signature="e#7750#10106#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -101,6 +121,7 @@
       <find>light</find>
       <find>material</find>
       <find>cube</find>
+      <find>HERO</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -123,6 +144,8 @@
         <option value="$PROJECT_DIR$/lib/OrbitControls.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/lib/TweenMax.min.js" />
+        <option value="$PROJECT_DIR$/rabbit.js" />
+        <option value="$PROJECT_DIR$/material.js" />
         <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
@@ -189,6 +212,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/index.html" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -305,12 +329,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1516599794058</updated>
-      <workItem from="1516599796771" duration="12024000" />
+      <workItem from="1516599796771" duration="12316000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12024000" />
+    <option name="totallyTimeSpent" value="12316000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1440" y="-58" width="1440" height="900" extended-state="0" />
@@ -443,16 +467,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rabbit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="327" column="0" lean-forward="false" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
+          <folding>
+            <element signature="e#29#4720#0" expanded="false" />
+            <element signature="e#4762#6556#0" expanded="false" />
+            <element signature="e#6598#7705#0" expanded="false" />
+            <element signature="e#7750#10106#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/material.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="3" lean-forward="false" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#3739#8698#0" expanded="false" />
-            <element signature="e#8744#10622#0" expanded="false" />
-            <element signature="e#10668#11815#0" expanded="false" />
-            <element signature="e#11864#14322#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="367">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
