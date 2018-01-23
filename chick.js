@@ -7,8 +7,8 @@ var CHICK = function () {
   this.mesh.add(this.body);
 
   // 躯干
-  var torsoGeom = new THREE.CubeGeometry(7, 7, 10, 1);
-  this.torso = new THREE.Mesh(torsoGeom, brownMat);
+  var torsoGeom = new THREE.CubeGeometry(10, 10, 10, 1);
+  this.torso = new THREE.Mesh(torsoGeom, chick_brownMat);
   this.torso.position.z = 0;
   this.torso.position.y = 7;
   this.torso.castShadow = true;
@@ -16,16 +16,16 @@ var CHICK = function () {
 
   // 内裤
   var pantsGeom = new THREE.CubeGeometry(9, 9, 5, 1);
-  this.pants = new THREE.Mesh(pantsGeom, whiteMat);
+  this.pants = new THREE.Mesh(pantsGeom, chick_whiteMat);
   this.pants.position.z = -3;
   this.pants.position.y = 0;
   this.pants.castShadow = true;
-  this.torso.add(this.pants);
+  // this.torso.add(this.pants);
 
   // 尾巴
   var tailGeom = new THREE.CubeGeometry(3, 3, 3, 1);
   tailGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, -2));
-  this.tail = new THREE.Mesh(tailGeom, lightBrownMat);
+  this.tail = new THREE.Mesh(tailGeom, chick_lightBrownMat);
   this.tail.position.z = -4;
   this.tail.position.y = 5;
   this.tail.castShadow = true;
@@ -36,7 +36,7 @@ var CHICK = function () {
   // 头
   var headGeom = new THREE.CubeGeometry(10, 10, 13, 1);
   headGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, 7.5));
-  this.head = new THREE.Mesh(headGeom, brownMat);
+  this.head = new THREE.Mesh(headGeom, chick_brownMat);
   this.head.position.z = 2;
   this.head.position.y = 11;
   this.head.castShadow = true;
@@ -44,7 +44,7 @@ var CHICK = function () {
 
   // 脸颊
   var cheekGeom = new THREE.CubeGeometry(1, 4, 4, 1);
-  this.cheekR = new THREE.Mesh(cheekGeom, pinkMat);
+  this.cheekR = new THREE.Mesh(cheekGeom, chick_pinkMat);
   this.cheekR.position.x = -5;
   this.cheekR.position.z = 7;
   this.cheekR.position.y = -2.5;
@@ -57,7 +57,7 @@ var CHICK = function () {
 
   // 鼻子
   var noseGeom = new THREE.CubeGeometry(6, 6, 3, 1);
-  this.nose = new THREE.Mesh(noseGeom, lightBrownMat);
+  this.nose = new THREE.Mesh(noseGeom, chick_lightBrownMat);
   this.nose.position.z = 13.5;
   this.nose.position.y = 2.6;
   this.nose.castShadow = true;
@@ -67,7 +67,7 @@ var CHICK = function () {
   var mouthGeom = new THREE.CubeGeometry(4, 2, 4, 1);
   mouthGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, 3));
   mouthGeom.applyMatrix(new THREE.Matrix4().makeRotationX(PI / 12));
-  this.mouth = new THREE.Mesh(mouthGeom, brownMat);
+  this.mouth = new THREE.Mesh(mouthGeom, chick_brownMat);
   this.mouth.position.z = 8;
   this.mouth.position.y = -4;
   this.mouth.castShadow = true;
@@ -75,7 +75,7 @@ var CHICK = function () {
 
   // 爪子
   var pawFGeom = new THREE.CubeGeometry(3, 3, 3, 1);
-  this.pawFR = new THREE.Mesh(pawFGeom, lightBrownMat);
+  this.pawFR = new THREE.Mesh(pawFGeom, chick_lightBrownMat);
   this.pawFR.position.x = -2;
   this.pawFR.position.z = 6;
   this.pawFR.position.y = 1.5;
@@ -88,7 +88,7 @@ var CHICK = function () {
   this.body.add(this.pawFL);
 
   var pawBGeom = new THREE.CubeGeometry(3, 3, 6, 1);
-  this.pawBL = new THREE.Mesh(pawBGeom, lightBrownMat);
+  this.pawBL = new THREE.Mesh(pawBGeom, chick_lightBrownMat);
   this.pawBL.position.y = 1.5;
   this.pawBL.position.z = 0;
   this.pawBL.position.x = 5;
@@ -112,7 +112,7 @@ var CHICK = function () {
   earGeom.vertices[3].z += .5;
   earGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 9, 0));
 
-  this.earL = new THREE.Mesh(earGeom, brownMat);
+  this.earL = new THREE.Mesh(earGeom, chick_brownMat);
   this.earL.position.x = 2;
   this.earL.position.z = 2.5;
   this.earL.position.y = 5;
@@ -128,7 +128,7 @@ var CHICK = function () {
 
   var eyeGeom = new THREE.CubeGeometry(2, 4, 4);
 
-  this.eyeL = new THREE.Mesh(eyeGeom, whiteMat);
+  this.eyeL = new THREE.Mesh(eyeGeom, chick_whiteMat);
   this.eyeL.position.x = 5;
   this.eyeL.position.z = 5.5;
   this.eyeL.position.y = 2.9;
@@ -137,7 +137,7 @@ var CHICK = function () {
 
   // 虹膜（眼珠子）
   var irisGeom = new THREE.CubeGeometry(.6, 2, 2);
-  this.iris = new THREE.Mesh(irisGeom, blackMat);
+  this.iris = new THREE.Mesh(irisGeom,chick_blackMat);
   this.iris.position.x = 1.2;
   this.iris.position.y = 1;
   this.iris.position.z = 1;

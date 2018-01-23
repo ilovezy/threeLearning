@@ -63,11 +63,10 @@
     antialias: true, // 抗锯齿 开启会卡
   }
 
-  function JUMP(){
+  function JUMP() {
     hero.jump()
     chick.jump()
   }
-
 
 
   var STAGE = document.getElementById('canvas-frame')
@@ -145,11 +144,11 @@
     hero = new Hero();
     chick = new CHICK()
 
-    chick.mesh.rotation.y = PI;
-    chick.mesh.position.x = -100
+    chick.mesh.rotation.y = PI / 2;
+    chick.mesh.position.x = -50
 
     hero.mesh.rotation.y = PI / 2;
-    hero.mesh.position.x = 100
+    hero.mesh.position.x = 50
     scene.add(hero.mesh);
     scene.add(chick.mesh);
     hero.nod();
