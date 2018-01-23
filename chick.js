@@ -47,9 +47,9 @@ var CHICK = function () {
     // wireframe: true // 打开
   });
   this.head = new THREE.Mesh(headGeometry, headMaterial);
-   this.head.position = new THREE.Vector3(0, 0, 0);
-   this.head.position.z = 5;
+ this.head.position = new THREE.Vector3(0, 0, 0);
   this.head.position.y = 12;
+ this.head.position.z = 7;
   this.head.castShadow = true;
    // this.head.rotation.x = 30
    // this.head.rotation.y = 3
@@ -162,17 +162,18 @@ var CHICK = function () {
   // var eyeGeom = new THREE.CubeGeometry(2, 4, 4);
   var eyeGeom = new THREE.CylinderBufferGeometry( 1, 1, 0.2, 32 );
   this.eyeL = new THREE.Mesh(eyeGeom, chick_whiteMat);
-  this.eyeL.position.x = 5;
-  this.eyeL.position.z = 5.5;
-  this.eyeL.position.y = 2.9;
-  this.eyeL.rotation.y = 2.9;
+  this.eyeL.position.x = 4;
+  this.eyeL.position.z = 1;
+  this.eyeL.position.y = .9;
+  this.eyeL.rotation.z = PI / 2;
+
   this.eyeL.castShadow = false;
   this.head.add(this.eyeL);
 
   // 虹膜（眼珠子）
   var irisGeom = new THREE.SphereGeometry(.6, 2, 2);
   this.iris = new THREE.Mesh(irisGeom,chick_blackMat);
-  this.iris.position.x = 1.2;
+  this.iris.position.x = 0;
   this.iris.position.y = 1;
   this.iris.position.z = 1;
   this.eyeL.add(this.iris);
@@ -290,7 +291,7 @@ CHICK.prototype.nod = function () {
   var tPawBLRot = Math.random() * PI * 1.5
   var tPawBLY = -12 + Math.random() * 8;
   TweenMax.to(this.pawBL.rotation, sp / 2, {x: tPawBLRot, ease: Power1.easeInOut, yoyo: true, repeat: 2});
-  TweenMax.to(this.pawBL.position, sp / 2, {x: tPawBLY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
+  // TweenMax.to(this.pawBL.position, sp / 2, {y: tPawBLY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
 
 
   // PAWS BACK RIGHT
@@ -298,7 +299,7 @@ CHICK.prototype.nod = function () {
   var tPawBRRot = Math.random() * PI * 1.5 ; // 脚步旋转的弧度
   var tPawBRY = -12 + Math.random() * 8; // 脚步上下距离 
   TweenMax.to(this.pawBR.rotation, sp / 2, {x: tPawBRRot, ease: Power1.easeInOut, yoyo: true, repeat: 2});
-  TweenMax.to(this.pawBR.position, sp / 2, {x: tPawBRY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
+  // TweenMax.to(this.pawBR.position, sp / 2, {y: tPawBRY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
 
   // MOUTH
   var tMouthRot = Math.random() * PI / 8;
