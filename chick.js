@@ -14,14 +14,6 @@ var CHICK = function () {
   this.torso.castShadow = true;
   this.body.add(this.torso);
 
-  // 内裤
-  var pantsGeom = new THREE.CubeGeometry(9, 9, 5, 1);
-  this.pants = new THREE.Mesh(pantsGeom, chick_whiteMat);
-  this.pants.position.z = -3;
-  this.pants.position.y = 0;
-  this.pants.castShadow = true;
-  // this.torso.add(this.pants);
-
   // 尾巴
   var tailGeom = new THREE.CubeGeometry(3, 3, 3, 1);
   tailGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, -2));
@@ -42,26 +34,13 @@ var CHICK = function () {
   this.head.castShadow = true;
   this.body.add(this.head);
 
-  // 脸颊
-  var cheekGeom = new THREE.CubeGeometry(1, 4, 4, 1);
-  this.cheekR = new THREE.Mesh(cheekGeom, chick_pinkMat);
-  this.cheekR.position.x = -5;
-  this.cheekR.position.z = 7;
-  this.cheekR.position.y = -2.5;
-  this.cheekR.castShadow = true;
-  this.head.add(this.cheekR);
-
-  this.cheekL = this.cheekR.clone();
-  this.cheekL.position.x = -this.cheekR.position.x;
-  this.head.add(this.cheekL);
-
-  // 鼻子
-  var noseGeom = new THREE.CubeGeometry(6, 6, 3, 1);
-  this.nose = new THREE.Mesh(noseGeom, chick_lightBrownMat);
-  this.nose.position.z = 13.5;
-  this.nose.position.y = 2.6;
-  this.nose.castShadow = true;
-  this.head.add(this.nose);
+  // // 鼻子
+  // var noseGeom = new THREE.CubeGeometry(6, 6, 3, 1);
+  // this.nose = new THREE.Mesh(noseGeom, chick_lightBrownMat);
+  // this.nose.position.z = 13.5;
+  // this.nose.position.y = 2.6;
+  // this.nose.castShadow = true;
+  // this.head.add(this.nose);
 
   // 嘴
   var mouthGeom = new THREE.CubeGeometry(4, 2, 4, 1);
@@ -73,43 +52,67 @@ var CHICK = function () {
   this.mouth.castShadow = true;
   this.head.add(this.mouth);
 
-  // 爪子
-  var pawFGeom = new THREE.CubeGeometry(3, 3, 3, 1);
-  this.pawFR = new THREE.Mesh(pawFGeom, chick_lightBrownMat);
-  this.pawFR.position.x = -2;
-  this.pawFR.position.z = 6;
-  this.pawFR.position.y = 1.5;
-  this.pawFR.castShadow = true;
-  this.body.add(this.pawFR);
-
-  this.pawFL = this.pawFR.clone();
-  this.pawFL.position.x = -this.pawFR.position.x;
-  this.pawFL.castShadow = true;
-  this.body.add(this.pawFL);
-
-  var pawBGeom = new THREE.CubeGeometry(3, 3, 6, 1);
-  this.pawBL = new THREE.Mesh(pawBGeom, chick_lightBrownMat);
+  var pawBGeom = new THREE.CubeGeometry(0.5, 0.5, 6, 1);
+  this.pawBL = new THREE.Mesh(pawBGeom, new THREE.MeshPhongMaterial({
+    color: 'orange',
+    shininess: 0,
+    shading: THREE.FlatShading,
+  }));
+  this.pawBL.position.x = 5;
   this.pawBL.position.y = 1.5;
   this.pawBL.position.z = 0;
-  this.pawBL.position.x = 5;
-  this.pawBL.castShadow = true;
-  this.body.add(this.pawBL);
+  this.pawBL.castShadow = false;
 
+  // 鸡爪子
+  var clawGeom = new THREE.CubeGeometry(.3, 3.5, 0.3, 1);
+  this.claw = new THREE.Mesh(clawGeom,new THREE.MeshPhongMaterial({
+    color: 'orange',
+    shininess: 0,
+    shading: THREE.FlatShading,
+  }));
+  this.claw.position.x = 0;
+  this.claw.position.y = 1.4;
+  this.claw.position.z = 3;
+
+  this.claw1 = this.claw.clone()
+  this.claw1.position.x = -1
+  this.claw1.position.y = 1.4
+  this.claw1.position.z = 3
+  this.claw1.rotation.z = 13
+
+  this.claw2 = this.claw.clone()
+  this.claw2.position.x = 1
+  this.claw2.position.y = 1.4
+  this.claw2.position.z = 3
+  this.claw2.rotation.z = -13
+
+  this.pawBL.add(this.claw);
+  this.pawBL.add(this.claw1);
+  this.pawBL.add(this.claw2);
+
+
+  // 复制一个爪子
   this.pawBR = this.pawBL.clone();
   this.pawBR.position.x = -this.pawBL.position.x;
   this.pawBR.castShadow = true;
+
+  this.body.add(this.pawBL);
   this.body.add(this.pawBR);
 
   // 耳朵
   var earGeom = new THREE.CubeGeometry(7, 18, 2, 1);
-  earGeom.vertices[6].x += 2;
+  earGeom.vertices[6].x += 4;
   earGeom.vertices[6].z += .5;
-  earGeom.vertices[7].x += 2;
-  earGeom.vertices[7].z -= .5;
-  earGeom.vertices[2].x -= 2;
-  earGeom.vertices[2].z -= .5;
-  earGeom.vertices[3].x -= 2;
+
+  earGeom.vertices[7].x += 4;
+  earGeom.vertices[7].z -= 1;
+
+  earGeom.vertices[2].x -= 4;
+  earGeom.vertices[2].z -= 1;
+
+  earGeom.vertices[3].x -= 4;
   earGeom.vertices[3].z += .5;
+
   earGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 9, 0));
 
   this.earL = new THREE.Mesh(earGeom, chick_brownMat);
@@ -132,7 +135,7 @@ var CHICK = function () {
   this.eyeL.position.x = 5;
   this.eyeL.position.z = 5.5;
   this.eyeL.position.y = 2.9;
-  this.eyeL.castShadow = true;
+  this.eyeL.castShadow = false;
   this.head.add(this.eyeL);
 
   // 虹膜（眼珠子）
@@ -167,7 +170,6 @@ CHICK.prototype.run = function () {
   var t = this.runningCycle;
 
   var amp = 4;
-  var disp = .2;
 
   // BODY
   this.body.position.y = 6 + Math.sin(t - PI / 2) * amp;
@@ -194,21 +196,6 @@ CHICK.prototype.run = function () {
   // TAIL
   this.tail.rotation.x = Math.cos(PI / 2 + t) * amp * .3;
 
-  // FRONT RIGHT PAW
-  this.pawFR.position.y = 1.5 + Math.sin(t) * amp;
-  this.pawFR.rotation.x = Math.cos(t) * PI / 4;
-
-
-  this.pawFR.position.z = 6 - Math.cos(t) * amp * 2;
-
-  // FRONT LEFT PAW
-
-  this.pawFL.position.y = 1.5 + Math.sin(disp + t) * amp;
-  this.pawFL.rotation.x = Math.cos(t) * PI / 4;
-
-
-  this.pawFL.position.z = 6 - Math.cos(disp + t) * amp * 2;
-
   // BACK RIGHT PAW
   this.pawBR.position.y = 1.5 + Math.sin(PI + t) * amp;
   this.pawBR.rotation.x = Math.cos(t + PI * 1.5) * PI / 3;
@@ -234,8 +221,6 @@ CHICK.prototype.jump = function () {
   TweenMax.to(this.earL.rotation, totalSpeed, {x: "+=.3", ease: Back.easeOut});
   TweenMax.to(this.earR.rotation, totalSpeed, {x: "-=.3", ease: Back.easeOut});
 
-  TweenMax.to(this.pawFL.rotation, totalSpeed, {x: "+=.7", ease: Back.easeOut});
-  TweenMax.to(this.pawFR.rotation, totalSpeed, {x: "-=.7", ease: Back.easeOut});
   TweenMax.to(this.pawBL.rotation, totalSpeed, {x: "+=.7", ease: Back.easeOut});
   TweenMax.to(this.pawBR.rotation, totalSpeed, {x: "-=.7", ease: Back.easeOut});
 
@@ -288,24 +273,6 @@ CHICK.prototype.nod = function () {
   TweenMax.to(this.pawBR.rotation, sp / 2, {x: tPawBRRot, ease: Power1.easeInOut, yoyo: true, repeat: 2});
   TweenMax.to(this.pawBR.position, sp / 2, {y: tPawBRY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
 
-  // PAWS FRONT LEFT
-
-  var tPawFLRot = Math.random() * PI / 2;
-  var tPawFLY = -4 + Math.random() * 8;
-
-  TweenMax.to(this.pawFL.rotation, sp / 2, {x: tPawFLRot, ease: Power1.easeInOut, yoyo: true, repeat: 2});
-
-  TweenMax.to(this.pawFL.position, sp / 2, {y: tPawFLY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
-
-  // PAWS FRONT RIGHT
-
-  var tPawFRRot = Math.random() * PI / 2;
-  var tPawFRY = -4 + Math.random() * 8;
-
-  TweenMax.to(this.pawFR.rotation, sp / 2, {x: tPawFRRot, ease: Power1.easeInOut, yoyo: true, repeat: 2});
-
-  TweenMax.to(this.pawFR.position, sp / 2, {y: tPawFRY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
-
   // MOUTH
   var tMouthRot = Math.random() * PI / 8;
   TweenMax.to(this.mouth.rotation, sp, {x: tMouthRot, ease: Power1.easeInOut});
@@ -323,5 +290,4 @@ CHICK.prototype.nod = function () {
     yoyo: true,
     repeat: 1
   });
-
 }
