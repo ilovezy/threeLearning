@@ -7,8 +7,12 @@ var CHICK = function () {
   this.mesh.add(this.body);
 
   // 躯干
-  var torsoGeom = new THREE.CubeGeometry(10, 10, 10, 1);
-  this.torso = new THREE.Mesh(torsoGeom, chick_brownMat);
+  var torsoGeom = new THREE.SphereGeometry(6, 10);
+  this.torso = new THREE.Mesh(torsoGeom, new THREE.MeshPhongMaterial({
+  color: '#fff',
+  shininess: 0,
+  shading: THREE.FlatShading,
+}));
   this.torso.position.z = 0;
   this.torso.position.y = 7;
   this.torso.castShadow = true;
@@ -26,12 +30,30 @@ var CHICK = function () {
   this.torso.rotation.x = -PI / 8;
 
   // 头
-  var headGeom = new THREE.CubeGeometry(10, 10, 13, 1);
-  headGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, 7.5));
-  this.head = new THREE.Mesh(headGeom, chick_brownMat);
-  this.head.position.z = 2;
-  this.head.position.y = 11;
+  // var headGeom = new THREE.CubeGeometry(10, 10, 13, 1);
+  // headGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, 7.5));
+  // this.head = new THREE.Mesh(headGeom, chick_brownMat);
+  // this.head.position.z = 2;
+  // this.head.position.y = 11;
+  // this.head.castShadow = true;
+  // this.body.add(this.head);
+
+  var headGeometry = new THREE.SphereGeometry(4, 8);
+  var headMaterial = new THREE.MeshPhongMaterial({
+    color: '#fff',
+      shininess: 0,
+
+      shading: THREE.FlatShading,
+    // wireframe: true // 打开
+  });
+  this.head = new THREE.Mesh(headGeometry, headMaterial);
+   this.head.position = new THREE.Vector3(0, 0, 0);
+   this.head.position.z = 5;
+  this.head.position.y = 12;
   this.head.castShadow = true;
+   // this.head.rotation.x = 30
+   // this.head.rotation.y = 3
+   // this.head.rotation.z = 3
   this.body.add(this.head);
 
   // // 鼻子
@@ -59,9 +81,11 @@ var CHICK = function () {
     shading: THREE.FlatShading,
   }));
   this.pawBL.position.x = 5;
-  this.pawBL.position.y = 1.5;
+  this.pawBL.position.y = .5;
   this.pawBL.position.z = 0;
   this.pawBL.castShadow = false;
+  this.pawBL.rotation.x = PI / 2; // rotation 用PI来计量，PI / 2 就是90度了
+  this.pawBL.rotation.y = 0.2;
 
   // 鸡爪子
   var clawGeom = new THREE.CubeGeometry(.3, 3.5, 0.3, 1);
@@ -96,27 +120,27 @@ var CHICK = function () {
   this.pawBL.add(this.claw2);
   this.pawBL.add(this.claw3);
 
-
   // 复制一个爪子
   this.pawBR = this.pawBL.clone();
   this.pawBR.position.x = -this.pawBL.position.x;
   this.pawBR.castShadow = true;
+  this.pawBR.rotation.y = -0.2;
 
   this.body.add(this.pawBL);
   this.body.add(this.pawBR);
 
   // 耳朵
-  var earGeom = new THREE.CubeGeometry(7, 18, 2, 1);
-  earGeom.vertices[6].x += 4;
+  var earGeom = new THREE.CubeGeometry(7, 5, 2, 1);
+  earGeom.vertices[6].x += 3;
   earGeom.vertices[6].z += .5;
 
-  earGeom.vertices[7].x += 4;
+  earGeom.vertices[7].x += 3;
   earGeom.vertices[7].z -= 1;
 
   earGeom.vertices[2].x -= 4;
   earGeom.vertices[2].z -= 1;
 
-  earGeom.vertices[3].x -= 4;
+  earGeom.vertices[3].x -= 3;
   earGeom.vertices[3].z += .5;
 
   earGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 9, 0));
@@ -135,17 +159,18 @@ var CHICK = function () {
   this.earR.castShadow = true;
   this.head.add(this.earR);
 
-  var eyeGeom = new THREE.CubeGeometry(2, 4, 4);
-
+  // var eyeGeom = new THREE.CubeGeometry(2, 4, 4);
+  var eyeGeom = new THREE.CylinderBufferGeometry( 1, 1, 0.2, 32 );
   this.eyeL = new THREE.Mesh(eyeGeom, chick_whiteMat);
   this.eyeL.position.x = 5;
   this.eyeL.position.z = 5.5;
   this.eyeL.position.y = 2.9;
+  this.eyeL.rotation.y = 2.9;
   this.eyeL.castShadow = false;
   this.head.add(this.eyeL);
 
   // 虹膜（眼珠子）
-  var irisGeom = new THREE.CubeGeometry(.6, 2, 2);
+  var irisGeom = new THREE.SphereGeometry(.6, 2, 2);
   this.iris = new THREE.Mesh(irisGeom,chick_blackMat);
   this.iris.position.x = 1.2;
   this.iris.position.y = 1;
@@ -205,14 +230,11 @@ CHICK.prototype.run = function () {
   // BACK RIGHT PAW
   this.pawBR.position.y = 1.5 + Math.sin(PI + t) * amp;
   this.pawBR.rotation.x = Math.cos(t + PI * 1.5) * PI / 3;
-
-
   this.pawBR.position.z = -Math.cos(PI + t) * amp;
 
   // BACK LEFT PAW
   this.pawBL.position.y = 1.5 + Math.sin(PI + t) * amp;
   this.pawBL.rotation.x = Math.cos(t + PI * 1.5) * PI / 3;
-
   this.pawBL.position.z = -Math.cos(PI + t) * amp;
 }
 
@@ -265,19 +287,18 @@ CHICK.prototype.nod = function () {
 
   // PAWS BACK LEFT
 
-  var tPawBLRot = Math.random() * PI / 2;
-  var tPawBLY = -4 + Math.random() * 8;
-
+  var tPawBLRot = Math.random() * PI * 1.5
+  var tPawBLY = -12 + Math.random() * 8;
   TweenMax.to(this.pawBL.rotation, sp / 2, {x: tPawBLRot, ease: Power1.easeInOut, yoyo: true, repeat: 2});
-  TweenMax.to(this.pawBL.position, sp / 2, {y: tPawBLY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
+  TweenMax.to(this.pawBL.position, sp / 2, {x: tPawBLY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
 
 
   // PAWS BACK RIGHT
 
-  var tPawBRRot = Math.random() * PI / 2;
-  var tPawBRY = -4 + Math.random() * 8;
+  var tPawBRRot = Math.random() * PI * 1.5 ; // 脚步旋转的弧度
+  var tPawBRY = -12 + Math.random() * 8; // 脚步上下距离 
   TweenMax.to(this.pawBR.rotation, sp / 2, {x: tPawBRRot, ease: Power1.easeInOut, yoyo: true, repeat: 2});
-  TweenMax.to(this.pawBR.position, sp / 2, {y: tPawBRY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
+  TweenMax.to(this.pawBR.position, sp / 2, {x: tPawBRY, ease: Power1.easeInOut, yoyo: true, repeat: 2});
 
   // MOUTH
   var tMouthRot = Math.random() * PI / 8;
