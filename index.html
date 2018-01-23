@@ -17,9 +17,9 @@
 </head>
 <body onload="threeStart();">
 
-<div id="canvas-frame" onclick="hero.jump()"></div>
+<div id="canvas-frame" onclick="JUMP()"></div>
 <div>
-  Fov:<input type="number" value="10" id="txtFov"/>(0到180的值)
+  Fov:<input type="number" value="18" id="txtFov"/>(0到180的值)
 </div>
 <script src="lib/three.min.js"></script>
 <script src="lib/OrbitControls.js"></script>
@@ -27,9 +27,11 @@
 <script src="lib/stats.js"></script>
 <script src="material.js"></script>
 <script src="rabbit.js"></script>
+<script src="chick.js"></script>
 <script>
   var stats, mControls;
   var speed = 16;
+  var hero, chick
 
   var CONFIG = {
     floorColor: '#e66218', // 地板颜色
@@ -60,6 +62,12 @@
 
     antialias: true, // 抗锯齿 开启会卡
   }
+
+  function JUMP(){
+    hero.jump()
+    chick.jump()
+  }
+
 
 
   var STAGE = document.getElementById('canvas-frame')
@@ -135,10 +143,17 @@
 
   function createHero() {
     hero = new Hero();
+    chick = new CHICK()
+
+    chick.mesh.rotation.y = PI;
+    chick.mesh.position.x = -100
+
     hero.mesh.rotation.y = PI / 2;
     hero.mesh.position.x = 100
     scene.add(hero.mesh);
+    scene.add(chick.mesh);
     hero.nod();
+    chick.nod();
   }
 
   function initGrid() {
