@@ -9,7 +9,7 @@ var chick_blackMat = new THREE.MeshPhongMaterial({
   shading: THREE.FlatShading,
 });
 var chick_brownMat = new THREE.MeshPhongMaterial({
-  color: '#64646D',
+  color: 'red',
   shininess: 0,
   shading: THREE.FlatShading,
 });
@@ -34,7 +34,7 @@ var blackMat = new THREE.MeshPhongMaterial({
   shading: THREE.FlatShading,
 });
 var brownMat = new THREE.MeshPhongMaterial({
-  color: 0xb44b39,
+  color: '0xb44b39',
   shininess: 0,
   shading: THREE.FlatShading,
 });

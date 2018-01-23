@@ -7,9 +7,9 @@ var CHICK = function () {
   this.mesh.add(this.body);
 
   // 躯干
-  var torsoGeom = new THREE.SphereGeometry(6, 10);
+  var torsoGeom = new THREE.SphereGeometry(6, 30);
   this.torso = new THREE.Mesh(torsoGeom, new THREE.MeshPhongMaterial({
-  color: '#fff',
+  color: '#FDE46D',
   shininess: 0,
   shading: THREE.FlatShading,
 }));
@@ -19,9 +19,14 @@ var CHICK = function () {
   this.body.add(this.torso);
 
   // 尾巴
-  var tailGeom = new THREE.CubeGeometry(3, 3, 3, 1);
+  var tailGeom = new THREE.SphereGeometry(1.2, 30);
   tailGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, -2));
-  this.tail = new THREE.Mesh(tailGeom, chick_lightBrownMat);
+  this.tail = new THREE.Mesh(tailGeom, new THREE.MeshPhongMaterial({
+    color: '#FDE46D',
+      shininess: 0,
+      shading: THREE.FlatShading,
+    // wireframe: true // 打开
+  }));
   this.tail.position.z = -4;
   this.tail.position.y = 5;
   this.tail.castShadow = true;
@@ -29,20 +34,10 @@ var CHICK = function () {
 
   this.torso.rotation.x = -PI / 8;
 
-  // 头
-  // var headGeom = new THREE.CubeGeometry(10, 10, 13, 1);
-  // headGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, 7.5));
-  // this.head = new THREE.Mesh(headGeom, chick_brownMat);
-  // this.head.position.z = 2;
-  // this.head.position.y = 11;
-  // this.head.castShadow = true;
-  // this.body.add(this.head);
-
-  var headGeometry = new THREE.SphereGeometry(4, 8);
+  var headGeometry = new THREE.SphereGeometry(4, 38);
   var headMaterial = new THREE.MeshPhongMaterial({
-    color: '#fff',
+    color: '#FDE46D',
       shininess: 0,
-
       shading: THREE.FlatShading,
     // wireframe: true // 打开
   });
@@ -51,27 +46,33 @@ var CHICK = function () {
   this.head.position.y = 12;
  this.head.position.z = 7;
   this.head.castShadow = true;
-   // this.head.rotation.x = 30
-   // this.head.rotation.y = 3
-   // this.head.rotation.z = 3
   this.body.add(this.head);
 
-  // // 鼻子
-  // var noseGeom = new THREE.CubeGeometry(6, 6, 3, 1);
-  // this.nose = new THREE.Mesh(noseGeom, chick_lightBrownMat);
-  // this.nose.position.z = 13.5;
-  // this.nose.position.y = 2.6;
-  // this.nose.castShadow = true;
-  // this.head.add(this.nose);
-
   // 嘴
-  var mouthGeom = new THREE.CubeGeometry(4, 2, 4, 1);
-  mouthGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, 3));
-  mouthGeom.applyMatrix(new THREE.Matrix4().makeRotationX(PI / 12));
-  this.mouth = new THREE.Mesh(mouthGeom, chick_brownMat);
-  this.mouth.position.z = 8;
-  this.mouth.position.y = -4;
+  var mouthGeom = new THREE.CubeGeometry(2, 1, 2, 1);
+  mouthGeom.vertices[6].x += 0.1;
+  mouthGeom.vertices[6].z += .5;
+  mouthGeom.vertices[7].x += 0.1;
+  mouthGeom.vertices[7].z -= 1;
+  mouthGeom.vertices[2].x -= 0.1;
+  mouthGeom.vertices[2].z -= 1;
+  mouthGeom.vertices[3].x -= 0.1;
+  mouthGeom.vertices[3].z += .5;
+
+  // mouthGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, 3));
+  // mouthGeom.applyMatrix(new THREE.Matrix4().makeRotationX(PI / 12));
+    mouthGeom.applyMatrix(new THREE.Matrix4().makeTranslation(0, 1, 0));
+
+  this.mouth = new THREE.Mesh(mouthGeom, new THREE.MeshPhongMaterial({
+  color: 'red',
+  shininess: 0,
+  shading: THREE.FlatShading,
+}));
+  this.mouth.position.z = 4;
+  this.mouth.position.y = -1;
   this.mouth.castShadow = true;
+  this.mouth.rotation.x = -PI / 2;
+
   this.head.add(this.mouth);
 
   var pawBGeom = new THREE.CubeGeometry(0.5, 0.5, 6, 1);
@@ -151,17 +152,20 @@ var CHICK = function () {
   this.earL.position.y = 5;
   this.earL.rotation.z = -PI / 12;
   this.earL.castShadow = true;
-  this.head.add(this.earL);
+  // this.head.add(this.earL);
 
   this.earR = this.earL.clone();
   this.earR.position.x = -this.earL.position.x;
   this.earR.rotation.z = -this.earL.rotation.z;
   this.earR.castShadow = true;
-  this.head.add(this.earR);
+  // this.head.add(this.earR);
 
   // var eyeGeom = new THREE.CubeGeometry(2, 4, 4);
   var eyeGeom = new THREE.CylinderBufferGeometry( 1, 1, 0.2, 32 );
-  this.eyeL = new THREE.Mesh(eyeGeom, chick_whiteMat);
+  this.eyeL = new THREE.Mesh(eyeGeom, new THREE.MeshPhongMaterial({
+  color: '#000',
+  shading: THREE.FlatShading,
+}));
   this.eyeL.position.x = 4;
   this.eyeL.position.z = 1;
   this.eyeL.position.y = .9;
@@ -172,7 +176,10 @@ var CHICK = function () {
 
   // 虹膜（眼珠子）
   var irisGeom = new THREE.SphereGeometry(.6, 2, 2);
-  this.iris = new THREE.Mesh(irisGeom,chick_blackMat);
+  this.iris = new THREE.Mesh(irisGeom,new THREE.MeshPhongMaterial({
+  color: '#fff',
+  // shading: THREE.FlatShading,
+}));
   this.iris.position.x = 0;
   this.iris.position.y = 1;
   this.iris.position.z = 1;
@@ -312,7 +319,7 @@ CHICK.prototype.nod = function () {
   TweenMax.to([iris1.position, iris2.position], sp, {y: tIrisY, z: tIrisZ, ease: Power1.easeInOut});
 
   //EYES
-  if (Math.random() > .2) TweenMax.to([this.eyeR.scale, this.eyeL.scale], sp / 8, {
+  if (Math.random() > .4) TweenMax.to([this.eyeR.scale, this.eyeL.scale], sp / 8, {
     y: 0,
     ease: Power1.easeInOut,
     yoyo: true,
