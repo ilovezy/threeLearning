@@ -86,9 +86,15 @@ var CHICK = function () {
   this.claw2.position.z = 3
   this.claw2.rotation.z = -13
 
+  this.claw3 = this.claw.clone()
+  this.claw3.position.x = 0
+  this.claw3.position.y = -0.01
+  this.claw3.position.z = 3
+
   this.pawBL.add(this.claw);
   this.pawBL.add(this.claw1);
   this.pawBL.add(this.claw2);
+  this.pawBL.add(this.claw3);
 
 
   // 复制一个爪子
